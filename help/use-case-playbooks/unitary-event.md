@@ -3,9 +3,9 @@ title: 单一事件
 description: 这是用于模拟“[!UICONTROL 单一事件]”类型的历程验证的说明页面。
 exl-id: 314f967c-e10f-4832-bdba-901424dc2eeb
 source-git-commit: 194667c26ed002be166ab91cc778594dc1f09238
-workflow-type: tm+mt
+workflow-type: ht
 source-wordcount: '889'
-ht-degree: 37%
+ht-degree: 100%
 
 ---
 
@@ -33,10 +33,10 @@ ht-degree: 37%
 
 >[!TIP]
 >
->如果您使用终端来运行CURL，则可以在运行CURL之前设置变量值，这样便无需在单个CURL中替换这些值。
->例如：如果您设置 `ORG_ID=************@AdobeOrg`，shell将自动替换每次出现 `$ORG_ID` ，以便您无需进行任何修改即可复制、粘贴和执行下面的曲线。
+>如果您使用终端运行 cURL，则可在运行 cURL 之前设置变量值，以便无需在各个 cURL 中替换这些值。
+>例如：如果您设置 `ORG_ID=************@AdobeOrg`，则 shell 将自动将每个出现的 `$ORG_ID` 都替换为该值，以使您无需任何修改即可复制、粘贴和执行以下 cURL。
 >
-> 本文档中使用以下变量
+> 本文档通篇使用以下变量
 >
 > ACCESS_TOKEN
 >
@@ -44,7 +44,7 @@ ht-degree: 37%
 >
 > ORG_ID
 >
-> 沙盒名称
+> SANDBOX_NAME
 >
 > PROFILE_SCHEMA_REF
 >
@@ -52,7 +52,7 @@ ht-degree: 37%
 >
 > PROFILE_DATASET_ID
 >
-> 历程ID
+> JOURNEY_ID
 >
 > PROFILE_BASE_CONNECTION_ID
 >
@@ -64,11 +64,11 @@ ht-degree: 37%
 >
 > CUSTOMER_MOBILE_NUMBER
 >
-> CUSTOMER_FIRSTNAME
+> CUSTOMER_FIRST_NAME
 >
 > CUSTOMER_LAST_NAME
 >
-> 电子邮件
+> EMAIL
 >
 > EVENT_SCHEMA_REF
 >
@@ -84,13 +84,13 @@ ht-degree: 37%
 >
 > EVENT_INLET_URL
 >
-> 时间戳
+> TIMESTAMP
 >
 > UNIQUE_EVENT_ID
 
 ## 提取 IMS 令牌
 
-1. 请按照[验证和访问 Experience Platform API](https://experienceleague.adobe.com/docs/experience-platform/landing/platform-apis/api-authentication.html) 文档中的说明操作以生成访问令牌。
+1. 请遵照[身份验证和访问 Experience Platform API](https://experienceleague.adobe.com/docs/experience-platform/landing/platform-apis/api-authentication.html) 文档生成访问令牌。
 
 ## 发布由战术手册创建的历程
 
@@ -100,9 +100,9 @@ ht-degree: 37%
 
    ![历程对象](../assets/journey-object.png)
 
-1. **使用cURL**
+1. **使用 cURL**
 
-   1. 发布历程。 响应将包含提取历程发布状态时下一步所需的作业ID。
+   1. 发布历程。响应将包含下一步中提取历程发布状态所需的作业 ID。
 
       ```bash
       curl --location --request POST "https://journey-private.adobe.io/authoring/jobs/journeyVersions/$JOURNEY_ID/deploy" \
@@ -114,7 +114,7 @@ ht-degree: 37%
       --header "Content-Type: application/json" 
       ```
 
-   1. 历程发布可能需要一些时间，因此要检查状态，请在cURL下方执行，直到 `response.status` 是 `SUCCESS`，请确保等待10-15秒（如果历程发布需要时间）。
+   1. 发布历程可能需要一段时间，为了检查状态，请执行以下 cURL，直到 `response.status` 为 `SUCCESS`，如果发布历程需要一段时间，请务必等待 10 至 15 秒。
 
       ```bash
       curl --location "https://journey-private.adobe.io/authoring/jobs/$JOB_ID" \
@@ -129,13 +129,13 @@ ht-degree: 37%
 
 >[!TIP]
 >
->如果您的电子邮件提供商支持加电子邮件，您可以通过附加来重复使用相同的电子邮件地址 `+<variable>` 放入您的电子邮件中，例如 `usertest@email.com` 可以恢复为 `usertest+v1@email.com` 或 `usertest+24jul@email.com`. 每次都使用新的配置文件，但仍使用同一个电子邮件 ID 将很有帮助。
+>如果您的电子邮件提供商支持加号电子邮件地址，则您可通过将 `+<variable>` 附加到电子邮件中而重用同一电子邮件地址，如可将 `usertest@email.com` 重用为 `usertest+v1@email.com` 或 `usertest+24jul@email.com`。这样有助于每次都使用一个全新的配置文件，但仍使用同一电子邮件 ID。
 >
->P.S： Plus电子邮件是一项可配置的功能，需要电子邮件提供商提供支持。 在测试中使用此类地址之前，请检查您是否能够接收此类地址的电子邮件。
+>备注：加号电子邮件地址是需要电子邮件提供商支持的一项可配置的功能。请检查能否在这些地址上收到电子邮件，然后再将其用于测试中。
 
 1. 初始用户需要创建&#x200B;**[!DNL customer dataset]**&#x200B;和 **[!DNL HTTP Streaming Inlet Connection]**。
 1. 如果您已创建&#x200B;**[!DNL customer dataset]**&#x200B;和 **[!DNL HTTP Streaming Inlet Connection]**，请跳至步骤 `5`。
-1. 通过执行以下cURL创建客户用户档案数据集。
+1. 通过执行以下 cURL 而创建一个客户配置文件数据集。
 
    ```bash
    curl --location "https://platform.adobe.io/data/foundation/catalog/dataSet" \
@@ -166,9 +166,9 @@ ht-degree: 37%
    }'
    ```
 
-   响应将采用格式 `"@/dataSets/<PROFILE_DATASET_ID>"`.
+   响应将采用 `"@/dataSets/<PROFILE_DATASET_ID>"` 格式。
 
-1. 创建 **[!DNL HTTP Streaming Inlet Connection]** 并通过以下步骤帮助完成这些任务。
+1. 按以下步骤创建 **[!DNL HTTP Streaming Inlet Connection]**。
    1. 创建基本连接。
 
       ```bash
@@ -194,7 +194,7 @@ ht-degree: 37%
       }'
       ```
 
-      从响应中获取基本连接ID并使用它代替 `PROFILE_BASE_CONNECTION_ID` 在以下cURL中
+      从响应获取基本连接 ID，并用它取代以下 cURL 中的 `PROFILE_BASE_CONNECTION_ID`
 
    1. 创建源连接。
 
@@ -216,7 +216,7 @@ ht-degree: 37%
       }'
       ```
 
-      从响应中获取源连接ID并使用它代替 `PROFILE_SOURCE_CONNECTION_ID`
+      从响应获取源连接 ID，并用它取代 `PROFILE_SOURCE_CONNECTION_ID`
 
    1. 创建目标连接。
 
@@ -248,7 +248,7 @@ ht-degree: 37%
       }'
       ```
 
-      从响应中获取目标连接ID并使用它代替 `PROFILE_TARGET_CONNECTION_ID`
+      从响应获取目标连接 ID，并用它取代 `PROFILE_TARGET_CONNECTION_ID`
 
    1. 创建数据流。
 
@@ -275,7 +275,7 @@ ht-degree: 37%
       }'
       ```
 
-   1. 获取基本连接。 结果将包含发送配置文件数据所需的inletUrl。
+   1. 获取基本连接。结果将包含发送配置文件数据所需的 inletUrl。
 
       ```bash
       curl --location "https://platform.adobe.io/data/foundation/flowservice/connections/$PROFILE_BASE_CONNECTION_ID" \
@@ -286,17 +286,17 @@ ht-degree: 37%
       --header "x-api-key: $API_KEY"
       ```
 
-      从响应中获取inletUrl并使用它来代替 `PROFILE_INLET_URL`
+      从响应获取 inletUrl，并用它取代 `PROFILE_INLET_URL`
 
-1. 在此步骤中，用户必须具有值 `PROFILE_DATASET_ID` 和 `PROFILE_INLET_URL`；如果不能，请参阅步骤 `3` 或 `4` 的量度。
-1. 要摄取客户，用户需要替换 `CUSTOMER_MOBILE_NUMBER`， `CUSTOMER_FIRST_NAME`， `CUSTOMER_LAST_NAME` 和 `EMAIL` 在以下cURL中。
+1. 用户在这一步必须具有 `PROFILE_DATASET_ID` 和 `PROFILE_INLET_URL` 的值；否则，请分别参考步骤 `3` 或 `4`。
+1. 要摄取客户，用户需要在以下 cURL 中替换 `CUSTOMER_MOBILE_NUMBER`、`CUSTOMER_FIRST_NAME`、`CUSTOMER_LAST_NAME` 和 `EMAIL`。
 
    1. `CUSTOMER_MOBILE_NUMBER` 将是手机号码，例如 `+1 000-000-0000`
    1. `CUSTOMER_FIRST_NAME` 将是用户的名字
    1. `CUSTOMER_LAST_NAME` 将是用户的姓氏
    1. `EMAIL` 将是用户的电子邮件地址，这对于使用不同的电子邮件 ID 至关重要，以便获取新的配置文件。
 
-1. 最后，执行curl以摄取客户资料。 更新 `body.xdmEntity.consents.marketing.preferred` 到 `email`， `sms`，或 `push` 基于要验证的渠道。 同时设置相应的 `val` 到 `y`.
+1. 最后执行 cURL 以摄取客户配置文件。根据要验证的渠道将 `body.xdmEntity.consents.marketing.preferred` 更新为 `email`、`sms` 或 `push`。还要将相应的 `val` 设置为 `y`。
 
    ```bash
    curl --location "$PROFILE_INLET_URL?synchronousValidation=true" \
@@ -358,7 +358,7 @@ ht-degree: 37%
 
 1. 初始用户需要创建&#x200B;**[!DNL event dataset]**&#x200B;和 **[!DNL HTTP Streaming Inlet Connection for events]**
 1. 如果您已创建&#x200B;**[!DNL event dataset]**&#x200B;和 **[!DNL HTTP Streaming Inlet Connection for events]**，请跳至步骤 `5`。
-1. 通过执行以下cURL创建事件数据集。
+1. 通过执行以下 cURL 而创建事件数据集。
 
    ```bash
    curl --location "https://platform.adobe.io/data/foundation/catalog/dataSet" \
@@ -389,9 +389,9 @@ ht-degree: 37%
    }'
    ```
 
-   响应将采用格式 `"@/dataSets/<EVENT_DATASET_ID>"`
+   响应将采用 `"@/dataSets/<EVENT_DATASET_ID>"` 格式
 
-1. 创建 **[!DNL HTTP Streaming Inlet Connection for events]**  并通过以下步骤帮助完成这些任务。
+1. 按以下步骤创建 **[!DNL HTTP Streaming Inlet Connection for events]**。
    <!-- TODO: Is the name unique? If so, we may need to generate and provide in variables.txt-->
    1. 创建基本连接。
 
@@ -418,7 +418,7 @@ ht-degree: 37%
       }'
       ```
 
-      从响应中获取基本连接ID并使用它代替 `EVENT_BASE_CONNECTION_ID`
+      从响应获取基本连接 ID，并用它取代 `EVENT_BASE_CONNECTION_ID`
 
    1. 创建源连接。
 
@@ -440,7 +440,7 @@ ht-degree: 37%
       }'
       ```
 
-      从响应中获取源连接ID并使用它代替 `EVENT_SOURCE_CONNECTION_ID`
+      从响应获取源连接 ID，并用它取代 `EVENT_SOURCE_CONNECTION_ID`
 
    1. 创建目标连接。
 
@@ -472,7 +472,7 @@ ht-degree: 37%
       }'
       ```
 
-      从响应中获取目标连接ID并使用它代替 `EVENT_TARGET_CONNECTION_ID`
+      从响应获取目标连接 ID，并用它取代 `EVENT_TARGET_CONNECTION_ID`
 
    1. 创建数据流。
 
@@ -499,7 +499,7 @@ ht-degree: 37%
       }'
       ```
 
-   1. 获取基本连接。 结果将包含发送配置文件数据所需的inletUrl。
+   1. 获取基本连接。结果将包含发送配置文件数据所需的 inletUrl。
 
    ```bash
    curl --location "https://platform.adobe.io/data/foundation/flowservice/connections/$EVENT_BASE_CONNECTION_ID" \
@@ -510,14 +510,14 @@ ht-degree: 37%
        --header "Content-Type: application/json" 
    ```
 
-   从响应中获取inletUrl并使用它来代替 `EVENT_INLET_URL`
+   从响应获取 inletUrl，并用它取代 `EVENT_INLET_URL`
 
-1. 在此步骤中，用户必须具有值 `EVENT_DATASET_ID` 和 `EVENT_INLET_URL`；如果不能，请参阅步骤 `3` 或 `4` 的量度。
-1. 要摄取事件，用户需要更改时间变量 `TIMESTAMP` cURL的请求正文中。
+1. 用户在这一步必须具有 `EVENT_DATASET_ID` 和 `EVENT_INLET_URL` 的值；否则，请分别参考步骤 `3` 或 `4`。
+1. 要摄取事件，用户需要更改以下 cURL 的请求正文中的时间变量 `TIMESTAMP`。
 
-   1. 替换 `body.xdmEntity` 包含下载的事件json的内容。
-   1. `TIMESTAMP` 是事件发生的时间，请使用UTC时区的时间戳，例如 `2023-09-05T23:57:00.071+00:00`.
-   1. 为变量设置唯一值 `UNIQUE_EVENT_ID`.
+   1. 将 `body.xdmEntity` 替换为下载的事件 json 的内容。
+   1. `TIMESTAMP` 将为事件发生的时间，并使用 UTC 时区的时间戳，如 `2023-09-05T23:57:00.071+00:00`。
+   1. 为变量 `UNIQUE_EVENT_ID` 设置唯一值。
 
    ```bash
    curl --location "$EVENT_INLET_URL?synchronousValidation=true" \
