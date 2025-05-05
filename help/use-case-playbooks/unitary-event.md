@@ -90,7 +90,7 @@ ht-degree: 100%
 
 ## 提取 IMS 令牌
 
-1. 请遵照[身份验证和访问 Experience Platform API](https://experienceleague.adobe.com/docs/experience-platform/landing/platform-apis/api-authentication.html) 文档生成访问令牌。
+1. 请遵照[身份验证和访问 Experience Platform API](https://experienceleague.adobe.com/docs/experience-platform/landing/platform-apis/api-authentication.html?lang=zh-Hans) 文档生成访问令牌。
 
 ## 发布由战术手册创建的历程
 
@@ -611,12 +611,12 @@ ht-degree: 100%
                "timestamp": "'$TIMESTAMP'",
                "web": {
                    "webInteraction": {
-                       "URL": "https://experienceleague.adobe.com/docs/experience-platform/edge/data-collection/collect-commerce-data.html?lang=en",
+                       "URL": "https://experienceleague.adobe.com/docs/experience-platform/edge/data-collection/collect-commerce-data.html?lang=zh-Hans",
                        "name": "Sample value",
                        "region": "Sample value"
                    },
                    "webPageDetails": {
-                       "URL": "https://experienceleague.adobe.com/docs/experience-platform/edge/data-collection/collect-commerce-data.html?lang=en",
+                       "URL": "https://experienceleague.adobe.com/docs/experience-platform/edge/data-collection/collect-commerce-data.html?lang=zh-Hans",
                        "isErrorPage": false,
                        "isHomePage": false,
                        "name": "Sample value",
