@@ -34,7 +34,7 @@ ht-degree: 98%
 >[!TIP]
 >
 >如果您使用终端运行 cURL，则可在运行 cURL 之前设置变量值，以便无需在各个 cURL 中替换这些值。
->例如：如果您设置 `ORG_ID=************@AdobeOrg`，则 shell 将自动将每个出现的 `$ORG_ID` 都替换为该值，以使您无需任何修改即可复制、粘贴和执行以下 cURL。
+>例如：如果您设置 `ORG_ID=**&#x200B;**&#x200B;**&#x200B;**&#x200B;**&#x200B;**@AdobeOrg`，则 shell 将自动将每个出现的 `$ORG_ID` 都替换为该值，以使您无需任何修改即可复制、粘贴和执行以下 cURL。
 >
 > 本文档通篇使用以下变量
 >
@@ -647,7 +647,7 @@ ht-degree: 98%
 
 或者，您可以查看`Journey Report`，为此，请单击`Bill of Materials page`上的`Journey Object`，这会将您重定向到`Journey Details page`。
 
-对于任何已发布的历程，用户必须获得&#x200B;**[!UICONTROL 查看报告]**按钮
+对于任何已发布的历程，用户必须获得&#x200B;**[!UICONTROL 查看报告]**&#x200B;按钮
 ![历程报告页](../assets/journey-report-page.png)
 
 
