@@ -4,8 +4,8 @@ description: 这是用于模拟“[!UICONTROL 单一事件]”类型的历程验
 exl-id: 314f967c-e10f-4832-bdba-901424dc2eeb
 source-git-commit: 194667c26ed002be166ab91cc778594dc1f09238
 workflow-type: tm+mt
-source-wordcount: '839'
-ht-degree: 100%
+source-wordcount: '849'
+ht-degree: 98%
 
 ---
 
@@ -90,7 +90,7 @@ ht-degree: 100%
 
 ## 提取 IMS 令牌
 
-1. 请遵照[身份验证和访问 Experience Platform API](https://experienceleague.adobe.com/docs/experience-platform/landing/platform-apis/api-authentication.html?lang=zh-Hans) 文档生成访问令牌。
+1. 请遵照[身份验证和访问 Experience Platform API](https://experienceleague.adobe.com/docs/experience-platform/landing/platform-apis/api-authentication.html) 文档生成访问令牌。
 
 ## 发布由战术手册创建的历程
 
@@ -102,7 +102,7 @@ ht-degree: 100%
 
 1. **使用 cURL**
 
-   1. 发布历程。响应将包含下一步中提取历程发布状态所需的作业 ID。
+   1. 发布历程。 响应将包含下一步中提取历程发布状态所需的作业 ID。
 
       ```bash
       curl --location --request POST "https://journey-private.adobe.io/authoring/jobs/journeyVersions/$JOURNEY_ID/deploy" \
@@ -129,9 +129,9 @@ ht-degree: 100%
 
 >[!TIP]
 >
->如果您的电子邮件提供商支持加号电子邮件地址，则您可通过将 `+<variable>` 附加到电子邮件中而重用同一电子邮件地址，如可将 `usertest@email.com` 重用为 `usertest+v1@email.com` 或 `usertest+24jul@email.com`。这样有助于每次都使用一个全新的配置文件，但仍使用同一电子邮件 ID。
+>如果您的电子邮件提供商支持加号电子邮件地址，则您可通过将 `+<variable>` 附加到电子邮件中而重用同一电子邮件地址，如可将 `usertest@email.com` 重用为 `usertest+v1@email.com` 或 `usertest+24jul@email.com`。 这样有助于每次都使用一个全新的配置文件，但仍使用同一电子邮件 ID。
 >
->备注：加号电子邮件地址是需要电子邮件提供商支持的一项可配置的功能。请检查能否在这些地址上收到电子邮件，然后再将其用于测试中。
+>备注：加号电子邮件地址是需要电子邮件提供商支持的一项可配置的功能。 请检查能否在这些地址上收到电子邮件，然后再将其用于测试中。
 
 1. 初始用户需要创建&#x200B;**[!DNL customer dataset]**&#x200B;和 **[!DNL HTTP Streaming Inlet Connection]**。
 1. 如果您已创建&#x200B;**[!DNL customer dataset]**&#x200B;和 **[!DNL HTTP Streaming Inlet Connection]**，请跳至步骤 `5`。
@@ -275,7 +275,7 @@ ht-degree: 100%
       }'
       ```
 
-   1. 获取基本连接。结果将包含发送配置文件数据所需的 inletUrl。
+   1. 获取基本连接。 结果将包含发送配置文件数据所需的 inletUrl。
 
       ```bash
       curl --location "https://platform.adobe.io/data/foundation/flowservice/connections/$PROFILE_BASE_CONNECTION_ID" \
@@ -296,7 +296,7 @@ ht-degree: 100%
    1. `CUSTOMER_LAST_NAME` 将是用户的姓氏
    1. `EMAIL` 将是用户的电子邮件地址，这对于使用不同的电子邮件 ID 至关重要，以便获取新的配置文件。
 
-1. 最后执行 cURL 以摄取客户配置文件。根据要验证的渠道将 `body.xdmEntity.consents.marketing.preferred` 更新为 `email`、`sms` 或 `push`。还要将相应的 `val` 设置为 `y`。
+1. 最后执行 cURL 以摄取客户配置文件。 根据要验证的渠道将 `body.xdmEntity.consents.marketing.preferred` 更新为 `email`、`sms` 或 `push`。 还要将相应的 `val` 设置为 `y`。
 
    ```bash
    curl --location "$PROFILE_INLET_URL?synchronousValidation=true" \
@@ -499,7 +499,7 @@ ht-degree: 100%
       }'
       ```
 
-   1. 获取基本连接。结果将包含发送配置文件数据所需的 inletUrl。
+   1. 获取基本连接。 结果将包含发送配置文件数据所需的 inletUrl。
 
    ```bash
    curl --location "https://platform.adobe.io/data/foundation/flowservice/connections/$EVENT_BASE_CONNECTION_ID" \
@@ -611,12 +611,12 @@ ht-degree: 100%
                "timestamp": "'$TIMESTAMP'",
                "web": {
                    "webInteraction": {
-                       "URL": "https://experienceleague.adobe.com/docs/experience-platform/edge/data-collection/collect-commerce-data.html?lang=zh-Hans",
+                       "URL": "https://experienceleague.adobe.com/docs/experience-platform/edge/data-collection/collect-commerce-data.html?lang=en",
                        "name": "Sample value",
                        "region": "Sample value"
                    },
                    "webPageDetails": {
-                       "URL": "https://experienceleague.adobe.com/docs/experience-platform/edge/data-collection/collect-commerce-data.html?lang=zh-Hans",
+                       "URL": "https://experienceleague.adobe.com/docs/experience-platform/edge/data-collection/collect-commerce-data.html?lang=en",
                        "isErrorPage": false,
                        "isHomePage": false,
                        "name": "Sample value",
@@ -648,7 +648,7 @@ ht-degree: 100%
 或者，您可以查看`Journey Report`，为此，请单击`Bill of Materials page`上的`Journey Object`，这会将您重定向到`Journey Details page`。
 
 对于任何已发布的历程，用户必须获得&#x200B;**[!UICONTROL 查看报告]**按钮
-![历程报告页面](../assets/journey-report-page.png)
+![历程报告页](../assets/journey-report-page.png)
 
 
 ## 清理
